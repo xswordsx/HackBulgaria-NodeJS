@@ -1,0 +1,1 @@
+echo 'Server response:'; echo $(curl  -s -H "Content-Type: application/json" --data @$1 http://localhost:8080/subscribe)
