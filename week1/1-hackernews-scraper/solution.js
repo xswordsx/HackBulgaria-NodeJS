@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var subscriber = require('./subscriber');
 var notifier = require('./notifier');
 
-var db = new Subscriber();
+var db = new Subscriber('database', true);
 
 var app = express();
 

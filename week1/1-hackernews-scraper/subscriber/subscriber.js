@@ -7,14 +7,9 @@ var fs = require('fs');
 
 Subscriber = function(savePath, clear) {
 	clear = clear || false;
-	this._key = fs.readFileSync('salt').toString('utf8');
+	this._key = fs.readFileSync(__dirname + '/salt').toString('utf8');
 	this._ids = keygen;
 	this._users = persist;
-
-	if(clear) {
-		persist.clear();
-		persist.persistSync();
-	}
 
 	persist.init({
 		dir: path.resolve(__dirname + '/../' + (savePath || 'database')),
@@ -25,6 +20,12 @@ Subscriber = function(savePath, clear) {
 		continuous: true,
 		interval: false
 	});
+
+	if(clear) {
+		persist.clear();
+		persist.persistSync();
+	}
+
 };
 
 Subscriber.prototype.cipher = function(data, key) {
@@ -46,11 +47,11 @@ Subscriber.prototype.subscribe = function(data) {
 	//Obsolete
 	data.type = data.type.filter(function(type){ return /comment|story/.test(type) });
 	data.verified = false;
-	data.verifyId = this.cipher(data.email);
+	data.verifyId = this.cipher(data.email + new Date().getTime());
 
 	this._users.setItem(newKey, data);
 
-	return 
+	return
 	{
 		verifyKey: data.verifyId,
 		subscriber:
