@@ -1,18 +1,15 @@
 {
-  "name": "NodeJS",
+  "name": "hackernews-scraper",
   "version": "0.0.0",
-  "description": "A repository for the course at HackBulgaria",
+  "description": "A scraper that goes through HackerNews",
   "main": "solution.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/xswordsx/NodeJS/"
-  },
   "author": "Ivan Latunov",
   "license": "MIT",
   "dependencies": {
-    "argparse": "^0.1.15"
+    "body-parser": "^1.9.0",
+    "express": "^4.9.7"
   }
 }
