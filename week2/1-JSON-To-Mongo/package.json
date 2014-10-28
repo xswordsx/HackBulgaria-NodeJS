@@ -1,0 +1,22 @@
+{
+  "name": "1-JSON-To-Mongo",
+  "version": "0.0.0",
+  "description": "Inserts JSON files in MongoDB",
+  "main": "solution.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xswordsx/HackBulgaria-NodeJS/week2/1-JSON-To-Mongo"
+  },
+  "keywords": [
+    "mongo",
+    "json"
+  ],
+  "author": "Ivan Latunov",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^1.4.19"
+  }
+}
