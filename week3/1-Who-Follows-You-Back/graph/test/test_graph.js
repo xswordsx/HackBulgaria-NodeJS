@@ -59,9 +59,20 @@ describe("A directional graph", function(){
 	});
 
 	describe('#getNeighborsFor', function () {
-		xit("should be able to return the neighbours of a given vertex", function(){
-
+		it("should be able to return the names of the neighbours of a given vertex", function(){
+			graph.addEdge(nodeA, nodeB);
+			graph.addEdge(nodeA, nodeC);
+			graph.getNeighborsFor(nodeA).should.contain(nodeB.name);
+			graph.getNeighborsFor(nodeA).should.contain(nodeC.name);
 		});
+		it("should return an empty array if the vertex has no neighbors", function(){
+			graph.addEdge(nodeA, nodeB);
+			graph.getNeighborsFor(nodeB).should.be.empty;
+		});
+		it("or the vertex is not in the graph", function(){
+			graph.addEdge(nodeA, nodeB);
+			graph.getNeighborsFor(nodeC).should.be.empty;
+		})
 	});
 
 	describe('#pathBetween', function () {
@@ -69,7 +80,7 @@ describe("A directional graph", function(){
 
 		});
 	});
-	
+
 	describe('#toString', function () {
 		xit("should be able to be stringified", function(){
 

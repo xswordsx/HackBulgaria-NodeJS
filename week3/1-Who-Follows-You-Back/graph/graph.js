@@ -11,4 +11,12 @@ DirectedGraph.prototype.addEdge = function (nodeA, nodeB) {
 	this.nodes[nodeA.name].children[nodeB.name] = nodeB;
 };
 
+DirectedGraph.prototype.getNeighborsFor = function(node) {
+	if(!this.nodes[node.name]) {
+		return [];
+	} else {
+		return Object.keys(this.nodes[node.name].children);
+	}
+};
+
 module.exports = DirectedGraph;
