@@ -1,0 +1,22 @@
+{
+  "name": "1-Who-Follows-You-Back",
+  "version": "0.0.0",
+  "description": "A service for checking who follows you on gitHub",
+  "main": "solution.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xswordsx/HackBulgaria-NodeJS"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xswordsx/HackBulgaria-NodeJS/issues"
+  },
+  "homepage": "https://github.com/xswordsx/HackBulgaria-NodeJS",
+  "dependencies": {
+    "express": "^4.10.0"
+  }
+}
