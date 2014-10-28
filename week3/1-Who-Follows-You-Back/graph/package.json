@@ -9,6 +9,7 @@
   "author": "Ivan Latunov <xswordsx@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "jasmine": "^2.0.1"
+    "chai": "^1.9.2",
+    "mocha": "*"
   }
 }
