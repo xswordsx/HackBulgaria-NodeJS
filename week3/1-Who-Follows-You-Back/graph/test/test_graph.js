@@ -76,7 +76,7 @@ describe("A directional graph", function(){
 	});
 
 	describe('#pathBetween', function () {
-		xit("should be able to tell if there is a path two nodes", function(){
+		xit("should be able to tell if there is a path between two nodes", function(){
 
 		});
 	});
