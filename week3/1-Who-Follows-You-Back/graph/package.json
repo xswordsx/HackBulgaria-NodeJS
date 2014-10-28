@@ -1,11 +1,11 @@
 {
-  "name": "graph",
+  "name": "Directional Graph",
   "version": "0.0.0",
-  "description": "",
+  "description": "A class describing a directional graph",
   "main": "graph.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Ivan Latunov <xswordsx@gmail.com>",
+  "license": "MIT"
 }
