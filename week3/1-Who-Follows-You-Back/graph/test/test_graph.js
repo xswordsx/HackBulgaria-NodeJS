@@ -62,8 +62,8 @@ describe("A directional graph", function(){
 		it("should be able to return the names of the neighbours of a given vertex", function(){
 			graph.addEdge(nodeA, nodeB);
 			graph.addEdge(nodeA, nodeC);
-			graph.getNeighborsFor(nodeA).should.contain(nodeB.name);
-			graph.getNeighborsFor(nodeA).should.contain(nodeC.name);
+			graph.getNeighborsFor(nodeA.name).should.contain(nodeB.name);
+			graph.getNeighborsFor(nodeA.name).should.contain(nodeC.name);
 		});
 		it("should return an empty array if the vertex has no neighbors", function(){
 			graph.addEdge(nodeA, nodeB);
@@ -71,13 +71,26 @@ describe("A directional graph", function(){
 		});
 		it("or the vertex is not in the graph", function(){
 			graph.addEdge(nodeA, nodeB);
-			graph.getNeighborsFor(nodeC).should.be.empty;
+			graph.getNeighborsFor(nodeC.name).should.be.empty;
 		})
 	});
 
 	describe('#pathBetween', function () {
-		xit("should be able to tell if there is a path between two nodes", function(){
+		it("should be able to tell if there is a path between two nodes", function(){
+			graph.addEdge(nodeA, nodeB);
+			graph.addEdge(nodeB, nodeC);
+			// Graph is now: [A->B->C]
+			graph.pathBetween(nodeA.name, nodeB.name).should.equal(true);
+			graph.pathBetween(nodeB.name, nodeC.name).should.equal(true);
+			graph.pathBetween(nodeA.name, nodeC.name).should.equal(true);
 
+			graph.pathBetween(nodeC.name, nodeB.name).should.equal(false);
+			graph.pathBetween(nodeB.name, nodeA.name).should.equal(false);
+			graph.pathBetween(nodeC.name, nodeA.name).should.equal(false);
+
+			graph.pathBetween(nodeA.name, nodeA.name).should.equal(false);
+			graph.pathBetween(nodeB.name, nodeB.name).should.equal(false);
+			graph.pathBetween(nodeC.name, nodeC.name).should.equal(false);
 		});
 	});
 
