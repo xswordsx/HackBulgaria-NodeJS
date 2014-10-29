@@ -12,11 +12,19 @@ DirectedGraph.prototype.addEdge = function (nodeA, nodeB) {
 };
 
 DirectedGraph.prototype.getNeighborsFor = function(node) {
-	if(!this.nodes[node.name]) {
+	if(!this.nodes[node]) {
 		return [];
 	} else {
-		return Object.keys(this.nodes[node.name].children);
+		return Object.keys(this.nodes[node].children);
 	}
+};
+
+DirectedGraph.prototype.pathBetween = function(nodeA, nodeB) {
+	var result = false;
+	Objec.keys(this.nodes[nodeA].children).forEach(function(child){
+
+	});
+	return result;
 };
 
 module.exports = DirectedGraph;
