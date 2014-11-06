@@ -23,8 +23,17 @@ app.get('*', function(req, res){
 })
 
 app.post('/create', function(req, res){
-	console.log('got POST request:', req.body);
-	res.status(200).end('got to here');
+	var integrityCheck = ['language', 'creator', 'code', 'filename']
+		.every(function(name){
+			return req.body.hasOwnProperty(name);
+		});
+	if(integrityCheck) {
+		console.log('got POST request:', req.body);
+		res.status(200).end('POST request successful.');
+	} else {
+		res.status(400).end('Missing a parameter');
+	}
+	
 });
 
 app.listen(config.port || 3000);
