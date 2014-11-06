@@ -48,7 +48,7 @@ function fromINItoJSON (data) {
 	var json = {};
 
 	var sections = getSections(data.toString());
-	
+
 	var kvList = getKeyValueList(data.toString());
 	// At this point the variables and their keys are in the same order
 	kvList.forEach(function(chunk, index){

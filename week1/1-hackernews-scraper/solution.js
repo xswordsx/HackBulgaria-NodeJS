@@ -22,7 +22,7 @@ app.post('/unsubscribe', function(req, res) {
 	});
 });
 
-app.get('/listSubscribers', function(req, res) {	
+app.get('/listSubscribers', function(req, res) {
 	res.status(201).end(db.listSubscribers().join('\n'));
 });
 
