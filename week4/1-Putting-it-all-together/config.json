@@ -1,0 +1,4 @@
+{
+	"mongoUrl": "localhost:27017/snippets",
+	"port": 3000
+}

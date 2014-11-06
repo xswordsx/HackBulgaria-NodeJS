@@ -1,0 +1,19 @@
+{
+  "name": "1-Putting-it-all-together",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "express": "^4.10.1",
+    "mongoose": "^3.8.18"
+  },
+  "devDependencies": {
+    "request": "^2.47.0"
+  }
+}
