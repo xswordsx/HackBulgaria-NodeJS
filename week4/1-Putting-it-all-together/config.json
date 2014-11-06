@@ -1,4 +1,8 @@
 {
-	"mongoUrl": "localhost:27017/snippets",
+	"mongoData": {
+		"host": "localhost",
+		"port": 27017,
+		"databse": "snippets"
+	},
 	"port": 3000
 }

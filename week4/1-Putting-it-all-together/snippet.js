@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 
-var config = require('./config.json');
-
-mongoose.connect('mongodb://' + (config.mongoUrl || 'localhost'));
+var config = require('./config.json').mongoData;
+var connectionString;
+connectionString = ['mongodb://', config.host, ':', config.port, '/', config.databse].join('');
+mongoose.connect(connectionString);
 
 var snippetSchema = new mongoose.Schema({
 	language: String,
