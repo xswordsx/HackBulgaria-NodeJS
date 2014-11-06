@@ -1,4 +1,4 @@
-var chai = require('chai').should();
+var should = require('chai').should();
 var DirectedGraph = require('../graph');
 
 
@@ -67,19 +67,22 @@ describe("A directional graph", function(){
 		});
 		it("should return an empty array if the vertex has no neighbors", function(){
 			graph.addEdge(nodeA, nodeB);
-			graph.getNeighborsFor(nodeB).should.be.empty;
+			graph.getNeighborsFor(nodeB.name).should.be.empty;
 		});
-		it("or the vertex is not in the graph", function(){
+		it("should return null if the vertex is not in the graph", function(){
 			graph.addEdge(nodeA, nodeB);
-			graph.getNeighborsFor(nodeC.name).should.be.empty;
+			should.not.exist(graph.getNeighborsFor(nodeC.name));
 		})
 	});
-
+DICKBUTT
 	describe('#pathBetween', function () {
 		it("should be able to tell if there is a path between two nodes", function(){
 			graph.addEdge(nodeA, nodeB);
 			graph.addEdge(nodeB, nodeC);
 			// Graph is now: [A->B->C]
+			nodeA.children = {"lorem": nodeA};
+			console.log("A:", JSON.stringify(nodeA, null, 2));
+			// console.log("B:", nodeB);
 			graph.pathBetween(nodeA.name, nodeB.name).should.equal(true);
 			graph.pathBetween(nodeB.name, nodeC.name).should.equal(true);
 			graph.pathBetween(nodeA.name, nodeC.name).should.equal(true);
