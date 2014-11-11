@@ -3,4 +3,7 @@ var app = express();
 var passport = require('passport');
 var path = require('path');
 
-var config = require(path.resovle(__dirname + '/config.json'));
+var config = require(path.resolve(__dirname + '/config.json'));
+
+app.listen(config.port);
+console.log("Express server running on", config.host + ":" + config.port);
