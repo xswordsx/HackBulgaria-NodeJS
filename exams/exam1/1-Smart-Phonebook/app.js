@@ -6,7 +6,7 @@ var q = require('q');
 var config = require('./config.json');
 var Contact = require('./models/contact');
 
-app.use(express.static(__dirname + '/test/'));
+app.use(express.static(__dirname + '/static/'));
 app.use('/contact', bodyParser.urlencoded({
 	extended: true
 }));
