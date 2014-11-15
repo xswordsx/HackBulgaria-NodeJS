@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var path = require('path');
+var q = require('q');
 
 var config = require(path.resolve(__dirname + '/../config.json')).database;
 
@@ -12,44 +13,51 @@ uri += config.url + ":" + config.port + "/" + config.db;
 var contactSchema = new mongoose.Schema({
 	phoneNumber: {
 		type: String,
-		required: true,
 		match: /^(\+?)(\d(\-|\ )?)+$/
 	},
 	personIdentifier: {
-		type: "ObjectId",
+		type: mongoose.SchemaTypes.ObjectId,
 	}
 });
 
-function start (log) {
+contactSchema.pre('save', function(next) {
+	'use strict';
+
+	this.personIdentifier = this._id;
+	next();
+});
+
+function start () {
+	'use strict';
+
+	var deferred = q.defer();
 	mongoose.connect(uri, function(err) {
-		var url = config.auth ? uri.split('@')[1] : uri;
 		if(err) {
-			console.error("There was an error connecting to:", url);
-			return;
-		}
-		if(log) {
-			console.log("Connection established to:", url);
+			deferred.reject(err);
+		} else {
+			deferred.resolve(config.auth ? uri.split('@')[1] : uri);
 		}
 	});
-
+	return deferred.promise;
 }
 
-function close (log) {
+function close () {
+	'use strict';
+
+	var deferred = q.defer();
 	mongoose.connection.close(function(err) {
-		var url = config.auth ? uri.split('@')[1] : uri;
 		if(err) {
-			console.error("Unable to close connection to:", url);
-		}
-		if(log) {
-			console.log("Closing mongoose connection.");
+			deferred.reject(err);
+		} else {
+			deferred.resolve(config.auth ? uri.split('@')[1] : uri);
 		}
 	});
+	return deferred.promise;
 }
 
-var Contact = mongoose.model('Contact', contactSchema);
 
 module.exports = {
-	model: Contact,
+	model: mongoose.model('Contact', contactSchema),
 	schema: contactSchema,
 	connect: start,
 	disconnect: close
