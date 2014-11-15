@@ -1,6 +1,45 @@
 <HTML>
 	<head></head>
 	<body>
+	<style>
+		input[type="text"] {
+			width: 100%;
+			display: block;
+			margin-bottom: 10px;
+			font-size: 24px;
+		}
+
+		input[type="submit"] {
+			width: 150px;
+			display: block;
+			font-size: 36px;
+			-moz-border-radius: 15px;
+			-webkit-border-radius: 15px;
+			padding: 5px;
+			color: #ffffff;
+			background-color: lightgreen;
+			border:1px solid lightgreen;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #009900;
+			border:1px solid #009900;
+		}
+		label {
+			color: grey;
+			font-size: 24px;
+			font-family: courier;
+		}
+		a {
+			font-size: 30px;
+			font-family: courier;
+			color: lightblue;
+			text-decoration: none;
+		}
+		a:hover {
+			color: #0066FF;
+		}
+	</style>
 		<center>
 			<form method="get" action="contact">
 				<label>Person Identifyer:</label>
@@ -19,6 +58,8 @@
 				<input name="id" type="text"/>
 				<input type="submit" value="Delete">
 			</form>
+			<br />
+			<a href="contacts">List all contacts</a>
 			<br />
 		</center>
 	</body>
