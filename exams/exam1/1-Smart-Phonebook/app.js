@@ -28,13 +28,13 @@ app.post('/contact', function (req, res) {
 app.get('/contacts', function (req, res) {
 	var query = {};
 	query.map = function() {
-		emit(this._id, {
+		emit(this._id, JSON.stringify({
 			phoneNumber: this.phoneNumber,
 			personIdentifier: this.personIdentifier
-		});
+		}));
 	};
 	query.reduce = function (key, value) {
-		return value;
+    return value;
 	};
 	Contact.model.mapReduce(query, function (err, contacts) {
 		if(err) {
@@ -72,24 +72,31 @@ app.delete('/contact/:id', function (req, res) {
 });
 
 
-app.get('/groups/:id', function (req, res) {
-	Contact.model.findOne({_id: req.params.id}, function (err, contact) {
-		if(err) {
-			res.status(404).end("User not found");
-		} else {
-			var query = {};
-			query.map = function() {
-				emit(this._id, this);
-			};
-			query.reduce = function(key, values) {
-				return values[0];
-			};
-			Contact.model.find({}, function (err, contacts) {
-
-			});
-			res.status(200).json(contact);
-		}
-	});
+app.get('/groups', function (req, res) {
+  Contact.model.find({}, function(err, data) {
+    if(err) {
+      res.status(400).end("Something went wrong:" + err.toString());
+    } else {
+      var groups = {};
+      data.forEach(function(contact) {
+        var tags = contact.personIdentifier.split(' ').map(function(tag) {
+          return tag[0].toUpperCase() + tag.slice(1).toLowerCase();
+        });
+        tags.forEach(function(tag) {
+          groups[tag] = groups[tag] || [];
+          groups[tag].push(contact);
+        });
+      });
+      var result = [];
+      Object.keys(groups).forEach(function(group) {
+        result.push({
+          group: group,
+          contacts: groups[group]
+        });
+      });
+      res.status(200).end(JSON.stringify(result, null, 4));
+    }
+  });
 });
 
 
