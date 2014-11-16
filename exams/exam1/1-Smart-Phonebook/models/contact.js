@@ -16,16 +16,17 @@ var contactSchema = new mongoose.Schema({
 		match: /^(\+?)(\d(\-|\ )?)+$/
 	},
 	personIdentifier: {
-		type: mongoose.SchemaTypes.ObjectId,
+		type: String,
+		index: { unique: true }
 	}
 });
 
-contactSchema.pre('save', function(next) {
-	'use strict';
+// contactSchema.pre('save', function(next) {
+// 	'use strict';
 
-	this.personIdentifier = this._id;
-	next();
-});
+// 	this.personIdentifier = this._id;
+// 	next();
+// });
 
 function start () {
 	'use strict';

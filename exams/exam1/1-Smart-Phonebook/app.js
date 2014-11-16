@@ -13,15 +13,14 @@ app.use('/contact', bodyParser.urlencoded({
 
 app.post('/contact', function (req, res) {
 	var contact = new Contact.model({
-		phoneNumber: req.body.phoneNumber
+		phoneNumber: req.body.phoneNumber,
+		personIdentifier: req.body.personIdentifier
 	});
 	contact.save(function(err) {
 		if(err) {
 			res.status(400).end("Could not save number: " + err);
 		} else {
-			var result = "Phone number: " + contact.phoneNumber;
-			result += "\n" + "ID: " + contact.personIdentifier;
-			res.status(200).end(contact._id);
+			res.status(200).json(contact._id);
 		}
 	});
 });
@@ -31,7 +30,7 @@ app.get('/contacts', function (req, res) {
 	query.map = function() {
 		emit(this._id, {
 			phoneNumber: this.phoneNumber,
-			personIdentifier: this._id
+			personIdentifier: this.personIdentifier
 		});
 	};
 	query.reduce = function (key, value) {
@@ -54,7 +53,10 @@ app.get('/contact/:id', function (req, res) {
 		if(err) {
 			res.status(404).end("User not found");
 		} else {
-			res.status(200).json(contact);
+			res.status(200).json({
+				phoneNumber: contact.phoneNumber,
+				personIdentifier: contact.personIdentifier
+			});
 		}
 	});
 });
@@ -69,6 +71,32 @@ app.delete('/contact/:id', function (req, res) {
 	});
 });
 
+
+app.get('/groups/:id', function (req, res) {
+	Contact.model.findOne({_id: req.params.id}, function (err, contact) {
+		if(err) {
+			res.status(404).end("User not found");
+		} else {
+			var query = {};
+			query.map = function() {
+				emit(this._id, this);
+			};
+			query.reduce = function(key, values) {
+				return values[0];
+			};
+			Contact.model.find({}, function (err, contacts) {
+
+			});
+			res.status(200).json(contact);
+		}
+	});
+});
+
+
+
+
+
+
 var httpServer = app.listen(config.port);
 console.log("Smart phonebook server listening on", config.host + ":" + config.port);
 Contact.connect()
@@ -76,6 +104,12 @@ Contact.connect()
 		console.log("Connected to database:", result);
 	})
 	.fail(mannerly_close);
+
+
+
+
+
+
 
 function mannerly_close(err) {
 	Contact.disconnect()
